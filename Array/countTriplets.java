@@ -1,9 +1,15 @@
+import java.util.*;
+
 class countTriplets{
     public static void main(String[] args) {
-        int arr[] = {2,3,5,7,8};
-        int ans=0;
-        ans = count_triplets(arr);
-        System.out.println(ans);
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        int arr[] = new int[size];
+        for(int i=0;i<size;i++)
+            arr[i] = sc.nextInt();   // using an array find some colletion alternative
+            
+        System.out.println(count_triplets(arr));
+        sc.close();
     }
 
     static int count_triplets(int[] arr){
@@ -34,9 +40,6 @@ class countTriplets{
                 ans += freq[i] * freq[j] * freq[i+j];
             }
         }
-
         return ans;
-
     }
-
 }

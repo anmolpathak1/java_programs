@@ -1,29 +1,45 @@
-public class countTripletsGp {
-    public static void main(String[] args){
-        int arr[] = {1,5,5,25,125};
-        int r = 5;
-        int ans = countTriplets(arr, r);
-        System.out.println("no of triplets : " + ans);
+// this program find out the number of triplets such that
+// a,ar,ar^2 and i<j<k  where i ,j,k are index of a,ar,ar^2
 
+import java.util.*;
+import java.io.*;
+
+
+public class countTripletsGp {
+
+    public static void main(String args[]) throws IOException{
+       // FileReader fr = new FileReader("testcases.txt");
+       // Scanner sc = new Scanner(fr);
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
+        int r = sc.nextInt();
+        long arr[] = new long[size];
+
+        for(int i=0;i<size;i++)
+            arr[i] = sc.nextInt();
+
+        System.out.println(ctgp(arr,r));
+
+        sc.close();
+        
     }
 
-    static int countTriplets(int []arr,int r){
-        int count = 0;
-        int i,j;
-        int a;
+    static long ctgp(long arr[],int r){
+        long count=0;
+        HashMap<Long,Long> left = new HashMap<Long,Long>(arr.length);
+        HashMap<Long,Long> right = new HashMap<Long,Long>(arr.length);
 
-        for(i=0;i<arr.length-2;i++){
-            a = arr[i];
-            for(j=i+1;j<arr.length-1;j++){
-                if(a * r == arr[j])
-                    break;
-            }
 
-            for(int k=j+1;k<arr.length;k++){
-                if(a * r * r == arr[k])
-                    count++;
+        for(int i=0;i<arr.length;i++)
+            right.put(arr[i],right.getOrDefault(arr[i],0l) + 1);
+
+        for(int i=0;i<arr.length;i++){
+            right.put(arr[i], right.getOrDefault(arr[i],0l) - 1);
+            if(arr[i] % r == 0){
+                count += left.getOrDefault(arr[i]/r,0l) * right.getOrDefault(arr[i] * r,0l);
             }
+            left.put(arr[i],left.getOrDefault(arr[i],0l) +1);
         }
         return count;
-    }
+    }    
 }
