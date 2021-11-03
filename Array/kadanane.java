@@ -1,41 +1,35 @@
-import java.io.FileReader;
-import java.io.IOException;
+//this program will calculate the maximum continious subarray sum . 
+
 import java.util.*;
 
-public class kadanane {
-    public static void main(String args[]) throws IOException{
-        FileReader fr = new FileReader("testcases.txt");
-        Scanner sc = new Scanner(fr);
+class Kadanane {
+    public static void main(String argrs[]){
+        Scanner sc = new Scanner(System.in);
         int size = sc.nextInt();
-        int a[] = new int[size];
-        int max_num =0;
+        int nums[] = new int[size];
+        int temp[] = new int[size];
+        int maxval ;
 
-        for(int i=0;i<size;i++){
-            a[i] = sc.nextInt();
-            max_num = Math.max(max_num, a[i]);
+         
+         //taking input
+        for(int i=0;i<size;i++)
+            nums[i] = sc.nextInt();
+
+        maxval = nums[0];
+        
+        //algo starts from here
+        if(size == 1){
+            System.out.println("maximum value is " + nums[0]);
+        }else{
+            temp[0] = nums[0];
+
+            for(int i=1;i<nums.length;i++){
+                temp[i] = Math.max(nums[i-1],nums[i] + temp[i-1]);
+                maxval = Math.max(temp[i],temp[i-1]);
+            
+            }         
+            System.out.println("maximum subarray sum is " + maxval);
         }
-
-        contiguousSum(a, max_num);
         sc.close();
     }
-
-    static void contiguousSum(int a[],int max_num){
-        int sum ,idxi=0,idxj=0;
-
-        for(int i=0;i<a.length;i++){
-            sum = 0;
-            for(int j=i;j<a.length;j++){
-                sum += a[j];
-
-                if(sum > max_num){
-                    max_num = sum;
-                    idxi = i;
-                    idxj=j;
-                }
-            }
-        }
-        System.out.println("max sum is  : " + max_num);
-        System.out.println("index is i : " + idxi + " index j :" + idxj);
-    } 
-    
 }

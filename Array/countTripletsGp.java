@@ -8,14 +8,14 @@ import java.io.*;
 public class countTripletsGp {
 
     public static void main(String args[]) throws IOException{
-       // FileReader fr = new FileReader("testcases.txt");
-       // Scanner sc = new Scanner(fr);
-        Scanner sc = new Scanner(System.in);
-        int size = sc.nextInt();
+        FileReader fr = new FileReader("testcases.txt");
+        Scanner sc = new Scanner(fr);
+       // Scanner sc = new Scanner(System.in);
+       // int size = sc.nextInt();
         int r = sc.nextInt();
-        long arr[] = new long[size];
+        long arr[] = new long[r];
 
-        for(int i=0;i<size;i++)
+        for(int i=0;i<r;i++)
             arr[i] = sc.nextInt();
 
         System.out.println(ctgp(arr,r));
