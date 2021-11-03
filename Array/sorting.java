@@ -4,12 +4,12 @@ public class sorting {
     
     public int[] insertionSort(int[] arg){
 
-        for(int i=0;i<arg.length;i++){
-            int j =  i - 1;
+        for(int i=1;i<arg.length;i++){
+            int j =  i;
 
-            while(j >=0 && arg[j] > arg[i]){
-                int temp = arg[i];
-                arg[i] = arg[j];
+            while(j > 0 && arg[j-1] > arg[j]){
+                int temp = arg[j-1];
+                arg[j-1] = arg[j];
                 arg[j] = temp;
                 j--;
             }
@@ -33,7 +33,11 @@ class sortingDemo{
         sorting st = new sorting();
         int[] result = st.insertionSort(arg);
 
-        System.out.println(result);
+        System.out.println("<-----output------>");
+
+        for(int val : result)
+            System.out.println(val);
+            
         sc.close();
     }
 }
